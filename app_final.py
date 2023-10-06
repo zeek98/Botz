@@ -15,6 +15,7 @@ from langchain.prompts import (
     MessagesPlaceholder
 )
 import streamlit as st
+from st_files_connection import FilesConnection
 from streamlit_chat import message
 from utils import *
 from dotenv import load_dotenv
@@ -26,8 +27,19 @@ load_dotenv()
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
 PINECONE_ENV = os.getenv('PINECONE_ENVIRONMENT')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_DEFAULT_REGION = os.getenv('AWS_DEFAULT_REGION')
 
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
+import streamlit as st
+from st_files_connection import FilesConnection
+
+# Create connection object and retrieve file contents.
+# Specify input format is a csv and to cache the result for 600 seconds.
+conn = st.experimental_connection('s3', type=FilesConnection)
+df = conn.read("testbucket-jrieke/myfile.csv", input_format="csv", ttl=600)
+
 
 st.subheader("Data Pilot GPT :rocket:")
 
