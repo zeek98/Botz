@@ -19,6 +19,6 @@ sentence_transformers
 streamlit_chat
 faiss-cpu
 PyPDF2
-s3fs==1.93
+s3fs==2023.9.2
 # Direct pypi install coming soo
 git+https://github.com/streamlit/files-connection
